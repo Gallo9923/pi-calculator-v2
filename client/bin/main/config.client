@@ -1,0 +1,6 @@
+# TODO: SET the registryhost
+Ice.Default.Locator=PiIceGrid/Locator:tcp -h hgrid22 -p 9000
+# Ice.Default.Locator=PiIceGrid/Locator:tcp -h registryhost -p 4061
+
+Client.Endpoints=default:tcp -p 9088
+Ice.Default.Host=hgrid20

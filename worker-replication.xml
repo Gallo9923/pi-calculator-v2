@@ -1,0 +1,41 @@
+<!-- Copyright (c) ZeroC, Inc. All rights reserved. -->
+
+<icegrid>
+
+    <application name="PiWorker">
+
+        <server-template id="PiWorkerTemplate">
+            <parameter name="index"/>
+            <parameter name="host"/>
+            <parameter name="port"/>
+            <server id="PiWorkerServer-${index}" exe="java" activation="always">
+                <option>-jar</option>
+                <option>worker/build/libs/worker.jar</option>
+                <adapter name="PiWorker" endpoints="tcp -h ${host} -p ${port}" replica-group="ReplicatedPiWorkerAdapter"/>
+                <property name="Identity" value="piworker"/>
+
+                <property name="IceMX.Metrics.Debug.GroupBy" value="id"/>
+                <property name="IceMX.Metrics.Debug.Disabled" value="1"/>
+                <property name="IceMX.Metrics.ByParent.GroupBy" value="parent"/>
+                <property name="IceMX.Metrics.ByParent.Disabled" value="1"/>
+            </server>
+        </server-template>
+
+        <replica-group id="ReplicatedPiWorkerAdapter">
+            <load-balancing type="round-robin"/>
+            <object identity="piworker" type="::Pi::TaskReport"/>
+        </replica-group>
+
+        <node name="node2">
+            <server-instance template="PiWorkerTemplate" index="1" port="9025" host="hgrid10"/>
+        </node>
+        <node name="node3">
+            <server-instance template="PiWorkerTemplate" index="2" port="9025" host="hgrid11"/>
+        </node>
+        <node name="node4">
+            <server-instance template="PiWorkerTemplate" index="3" port="9025" host="hgrid12"/>
+        </node>
+
+    </application>
+
+</icegrid>

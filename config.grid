@@ -1,0 +1,14 @@
+IceGrid.InstanceName=PiIceGrid
+
+#
+# IceGrid registry configuration.
+#
+IceGrid.Registry.Client.Endpoints=default -h hgrid2 -p 9000
+IceGrid.Registry.Server.Endpoints=default -h hgrid2 -p 9001
+IceGrid.Registry.Internal.Endpoints=default -h hgrid2 -p 9002
+IceGrid.Registry.LMDB.Path=registry
+IceGrid.Registry.PermissionsVerifier=PiIceGrid/NullPermissionsVerifier
+IceGrid.Registry.AdminPermissionsVerifier=PiIceGrid/NullPermissionsVerifier
+IceGrid.Registry.SSLPermissionsVerifier=PiIceGrid/NullSSLPermissionsVerifier
+IceGrid.Registry.AdminSSLPermissionsVerifier=PiIceGrid/NullSSLPermissionsVerifier
+IceGrid.Registry.Discovery.Interface=127.0.0.1

@@ -1,0 +1,5 @@
+TopicManager.Proxy=PiIceStorm/TopicManager:tcp -h hgrid2 -p 8090
+TopicName=Tasks
+THREAD_NUMBER=8
+BATCH_SIZE=10000
+

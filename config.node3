@@ -1,0 +1,13 @@
+IceGrid.InstanceName=PiIceGrid
+
+Ice.Default.Locator=PiIceGrid/Locator:default -h hgrid2 -p 9000
+#
+# IceGrid node configuration.
+#
+IceGrid.Node.Name=node3
+IceGrid.Node.Endpoints=default -h hgrid11 -p 9050
+IceGrid.Node.Data=./node
+#IceGrid.Node.Output=db
+#IceGrid.Node.RedirectErrToOut=1
+
+IceGrid.Node.Trace.Activator=3
