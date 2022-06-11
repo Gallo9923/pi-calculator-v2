@@ -1,0 +1,25 @@
+<state>
+  <timestamp value='1654952654573' />
+  <sourceSet name='default'>
+    <source name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\PI.ice'>
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\PiRequest.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\Time.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\Result.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\Task.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\TaskResult.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\Job.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\JobResult.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\Client.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\Worker.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\PiController.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\ClientPrx.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\_ClientPrxI.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\WorkerPrx.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\_WorkerPrxI.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\PiControllerPrx.java' />
+      <file name='G:\My Drive\______Doceavo Semestre\ArquiSoft\pi-calculator-v2\worker\build\generated-src\Pi\_PiControllerPrxI.java' />
+    </source>
+    <arg value='C:\Program Files\ZeroC\Ice-3.7.7\\bin\slice2java.exe' />
+    <arg value='-IC:\Program Files\ZeroC\Ice-3.7.7\\slice' />
+  </sourceSet>
+</state>
