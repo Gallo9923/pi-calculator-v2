@@ -40,6 +40,7 @@ public class WorkerI implements Pi.Worker{
         }
 
         Pi.Task task = piControllerPrx.getTask(jobId);
+        System.out.println(task == null);
 
         if (task == null) {
             return;
