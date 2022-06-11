@@ -30,7 +30,8 @@ public class PiControllerI implements PiController {
         this.communicator = communicator;
         this.jobs = new HashMap<String, Job>();
         this.workers = new ArrayList<>();
-
+        this.tasks = new ArrayList<>();
+        this.pendingTasks = new ArrayList<>();
 
         this.jobSem = new Semaphore(1, true);
         this.observerSem = new Semaphore(1, true);
