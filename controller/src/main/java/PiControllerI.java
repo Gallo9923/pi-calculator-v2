@@ -149,6 +149,7 @@ public class PiControllerI implements PiController {
                 System.out.println("task created");
 
                 this.tasks.put(taskId, task);
+                System.out.println("task size: " + this.tasks.size());
 
                 long taskMillisTimeout = Long.parseLong(communicator.getProperties().getProperty("taskMillisTimeout"));
                 new Thread(new Checker(this, taskMillisTimeout, task.id, jobSem)).start();
@@ -177,7 +178,7 @@ public class PiControllerI implements PiController {
             }
             // TODO: END Transaction
         }
-
+        System.out.println("task returned");
         return task;
     }
 
