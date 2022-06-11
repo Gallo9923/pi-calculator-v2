@@ -31,8 +31,9 @@ public class Worker{
 
                 adapter.activate();
 
-
-                final WorkerPrx subscriberProxy = WorkerPrx.uncheckedCast(communicator.stringToProxy(properties.getProperty("MyProxy")).ice_twoway());
+                String workerProxyString = properties.getProperty("MyProxy");
+                System.out.println(workerProxyString);
+                final WorkerPrx subscriberProxy = WorkerPrx.uncheckedCast(communicator.stringToProxy(workerProxyString).ice_twoway());
                 piControllerPrx.subscribe(subscriberProxy);
                 System.out.println("Subscribed - " + subscriberProxy.toString());
 
