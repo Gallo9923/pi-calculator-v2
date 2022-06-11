@@ -23,10 +23,14 @@ public class PiControllerI implements PiController {
 
     protected ArrayList<Task> pendingTasks;
 
+    protected BigInteger tasksDone;
+
     protected HashMap<String, Task> tasks;
     private ArrayList<WorkerPrx> workers;
 
     private HashMap<String, Boolean> jobState;
+
+    private BigInteger numberOfTasksNeeded;
 
     public PiControllerI(Communicator communicator){
         this.communicator = communicator;
@@ -39,6 +43,9 @@ public class PiControllerI implements PiController {
         this.observerSem = new Semaphore(1, true);
 
         this.jobState = new HashMap<String, Boolean>();
+        this.tasksDone = BigInteger.ZERO;
+
+        this.numberOfTasksNeeded = BigInteger.ZERO;
     }
 
     @Override
@@ -69,6 +76,9 @@ public class PiControllerI implements PiController {
         Job job = new Job(jobId, request.nPower, request.seed, 0.0, request.epsilonPower, LocalDateTime.now().toString(), LocalDateTime.now().toString(), "0", "0", clientProxy.toString(), jobBatchSize, "0");
         jobs.put(jobId, job);
         jobState.put(jobId, Boolean.FALSE);
+
+        BigInteger n = new BigInteger("10").pow(job.nPower);
+        this.numberOfTasksNeeded = n.divide(new BigInteger(job.batchSize + ""));
 
         new Thread(() -> notifyAllSubscribers(jobId, null)).start();
     }
@@ -135,11 +145,9 @@ public class PiControllerI implements PiController {
             Job job = jobs.get(jobId);
 
             BigInteger taskCounter = new BigInteger(job.taskCounter);
-            BigInteger n = new BigInteger("10").pow(job.nPower);
-            BigInteger batchSize = new BigInteger(job.batchSize + "");
 
             // TODO: Start Transaction
-            boolean taskNeeded = taskCounter.compareTo(n.divide(batchSize)) == -1;
+            boolean taskNeeded = taskCounter.compareTo(this.numberOfTasksNeeded) == -1;
             System.out.println("task counter: " + taskCounter + " - " + taskNeeded);
             if (taskNeeded){
                 System.out.println("New task");
@@ -160,12 +168,13 @@ public class PiControllerI implements PiController {
                 long taskMillisTimeout = Long.parseLong(communicator.getProperties().getProperty("taskMillisTimeout"));
                 new Thread(new Checker(this, taskMillisTimeout, task.id, jobSem)).start();
 
-            }else if (true || jobState.get(jobId).equals(Boolean.FALSE) ){
+            }else if (tasksDone.compareTo(numberOfTasksNeeded) == 0 || jobState.get(jobId).equals(Boolean.FALSE)  ){
                 System.out.println("Calculating pi");
 
                 jobState.put(jobId, Boolean.TRUE);
 
                 // Calculate PI
+                BigInteger n = new BigInteger("10").pow(job.nPower);
                 BigDecimal pi = (new BigDecimal(job.pointsInside).divide(new BigDecimal(n))).multiply(new BigDecimal(4));
                 job.pi = pi.toString();
 
@@ -211,6 +220,7 @@ public class PiControllerI implements PiController {
 
             System.out.println("set task result called");
 
+            tasksDone = tasksDone.add(BigInteger.ONE);
             //notifyAllSubscribers(job.id);
 
         } catch (InterruptedException e) {
