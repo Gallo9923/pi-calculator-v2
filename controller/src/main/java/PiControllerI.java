@@ -26,6 +26,8 @@ public class PiControllerI implements PiController {
     protected HashMap<String, Task> tasks;
     private ArrayList<WorkerPrx> workers;
 
+    private HashMap<String, Boolean> jobState;
+
     public PiControllerI(Communicator communicator){
         this.communicator = communicator;
         this.jobs = new HashMap<String, Job>();
@@ -35,6 +37,8 @@ public class PiControllerI implements PiController {
 
         this.jobSem = new Semaphore(1, true);
         this.observerSem = new Semaphore(1, true);
+
+        this.jobState = new HashMap<String, Boolean>();
     }
 
     @Override
@@ -64,6 +68,7 @@ public class PiControllerI implements PiController {
         String jobId = UUID.randomUUID().toString();
         Job job = new Job(jobId, request.nPower, request.seed, 0.0, request.epsilonPower, LocalDateTime.now().toString(), LocalDateTime.now().toString(), "0", "0", clientProxy.toString(), jobBatchSize, "0");
         jobs.put(jobId, job);
+        jobState.put(jobId, Boolean.FALSE);
 
         new Thread(() -> notifyAllSubscribers(jobId)).start();
     }
@@ -154,8 +159,11 @@ public class PiControllerI implements PiController {
                 long taskMillisTimeout = Long.parseLong(communicator.getProperties().getProperty("taskMillisTimeout"));
                 new Thread(new Checker(this, taskMillisTimeout, task.id, jobSem)).start();
 
-            }else {
+            }else if (jobState.get(jobId).equals(Boolean.FALSE) ){
                 System.out.println("Calculating pi");
+
+                jobState.put(jobId, Boolean.TRUE);
+
                 // Calculate PI
                 BigDecimal pi = (new BigDecimal(job.pointsInside).divide(new BigDecimal(n))).multiply(new BigDecimal(4));
                 job.pi = pi.toString();
