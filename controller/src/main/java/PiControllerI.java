@@ -168,7 +168,8 @@ public class PiControllerI implements PiController {
                 long taskMillisTimeout = Long.parseLong(communicator.getProperties().getProperty("taskMillisTimeout"));
                 new Thread(new Checker(this, taskMillisTimeout, task.id, jobSem)).start();
 
-            }else if (tasksDone.compareTo(numberOfTasksNeeded) == 0 || jobState.get(jobId).equals(Boolean.FALSE)  ){
+                //|| jobState.get(jobId).equals(Boolean.FALSE)
+            }else if (tasksDone.compareTo(numberOfTasksNeeded) == 0){
                 System.out.println("Calculating pi " + tasksDone.toString() + " " + numberOfTasksNeeded.toString());
 
                 jobState.put(jobId, Boolean.TRUE);
