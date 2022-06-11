@@ -31,12 +31,16 @@ public class Client
             adapter.add(new ClientI(), com.zeroc.Ice.Util.stringToIdentity("client"));
             adapter.activate();
 
-            ClientPrx clientPrx =  Pi.ClientPrx.uncheckedCast(adapter.createProxy(com.zeroc.Ice.Util.stringToIdentity("client")));
+            //ClientPrx clientPrx =  Pi.ClientPrx.uncheckedCast(adapter.createProxy(com.zeroc.Ice.Util.stringToIdentity("client")));
+            ClientPrx clientPrx = Pi.ClientPrx.checkedCast(communicator.stringToProxy("client:tcp -h hgrid2 -p 9088"));
             if(clientPrx == null)
             {
                 throw new Error("Invalid Callback proxy");
             }
-            status = run(communicator, clientPrx);
+
+            new Thread(() -> run(communicator, clientPrx)).start();
+
+            communicator.waitForShutdown();
         }
 
         System.exit(status);
@@ -78,6 +82,7 @@ public class Client
                         }while(piControllerPrx == null);
 
                         Client.calculatePi(piControllerPrx, clientPrx);
+                        exit = true;
                         break;
                     default:
                         System.out.println("Unknown option :(");
