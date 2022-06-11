@@ -1,4 +1,4 @@
-TopicManager.Proxy=PiIceStorm/TopicManager:tcp -h hgrid2 -p 8090
+TopicManager.Proxy=PiIceStorm/TopicManager:tcp -h hgrid16 -p 8090
 BATCH_SIZE1 = 1000000
 BATCH_SIZE2 = 100000
 taskMillisTimeout = 6000

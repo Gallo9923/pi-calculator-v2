@@ -26,7 +26,7 @@
             <object identity="picontroller" type="::Pi::PiController"/>
         </replica-group>
 
-        <node name="node1">
+        <node name="node8">
             <server-instance template="PiControllerTemplate" index="1" port="9075" host="hgrid2"/>
         </node>
     </application>

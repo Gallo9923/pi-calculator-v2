@@ -1,6 +1,6 @@
 IceGrid.InstanceName=PiIceGrid
 
-Ice.Default.Locator=PiIceGrid/Locator:default -h hgrid2 -p 9000
+Ice.Default.Locator=PiIceGrid/Locator:default -h hgrid16 -p 9000
 #
 # IceGrid node configuration.
 #
