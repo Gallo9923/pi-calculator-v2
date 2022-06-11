@@ -159,6 +159,8 @@ public class PiControllerI implements PiController {
                 long seconds = ChronoUnit.SECONDS.between(startTime, finishTime);
                 long minutes = ChronoUnit.MINUTES.between(startTime, finishTime);
 
+                System.out.println("Updating Job's Pi Result " + pi.toString() + " / milli: " + milliseconds + " / seconds: " + seconds + " / minutes: " + minutes);
+
                 Time time = new Time(milliseconds + "", seconds + "", minutes + "" );
 
                 Result result = new Result(pi.toString(), job.repNumbers, time);
