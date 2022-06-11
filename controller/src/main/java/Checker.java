@@ -37,7 +37,7 @@ public class Checker implements Runnable {
                     if (task.state.equals(TaskState.IN_PROGRESS.toString())){
                         task.state = TaskState.PENDING.toString();
                         piController.pendingTasks.add(task);
-                        piController.notifyAllSubscribers(task.jobId);
+                        piController.notifyAllSubscribers(task.jobId, null);
                     }else if (task.state.equals(TaskState.DONE.toString())){
                         pending = false;
                         break;

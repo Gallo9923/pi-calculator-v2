@@ -84,6 +84,7 @@ module Pi {
         void notifyPiResult(Job job);
         void subscribe(Worker* workerProxy);
         void unsubscribe(Worker* workerProxy);
+        void notifyAllSubscribers(string jobId);
     }
 
 

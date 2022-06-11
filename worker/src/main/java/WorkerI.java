@@ -72,7 +72,9 @@ public class WorkerI implements Pi.Worker{
 
             this.state = State.IDLE;
 
-            new Thread(() -> piControllerPrx.setTaskResult(taskResult)).start();
+            piControllerPrx.setTaskResult(taskResult);
+
+            piControllerPrx.notifyAllSubscribers(jobId);
 
             System.out.println("Task report " + taskResult.pointsInside + " - task id " + taskResult.taskId);
         }

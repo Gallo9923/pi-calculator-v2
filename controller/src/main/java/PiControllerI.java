@@ -70,12 +70,11 @@ public class PiControllerI implements PiController {
         jobs.put(jobId, job);
         jobState.put(jobId, Boolean.FALSE);
 
-        new Thread(() -> notifyAllSubscribers(jobId)).start();
+        new Thread(() -> notifyAllSubscribers(jobId, null)).start();
     }
 
-
-
-    protected void notifyAllSubscribers(String jobId){
+    @Override
+    public void notifyAllSubscribers(String jobId, Current current){
         
         System.out.println("Notify all subscribers for jobId " + jobId);
         
@@ -212,7 +211,7 @@ public class PiControllerI implements PiController {
 
             System.out.println("set task result called");
 
-            notifyAllSubscribers(job.id);
+            //notifyAllSubscribers(job.id);
 
         } catch (InterruptedException e) {
             e.printStackTrace();
