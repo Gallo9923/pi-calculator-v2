@@ -224,6 +224,8 @@ public class PiControllerI implements PiController {
                 this.workers.add(workerProxy);
 
                 System.out.println("ATTACHED: " + workerProxy.toString());
+            }else{
+                System.out.println("ALREADY ATTACHED: " + workerProxy.toString());
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

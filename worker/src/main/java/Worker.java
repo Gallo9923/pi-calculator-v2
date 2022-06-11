@@ -28,9 +28,11 @@ public class Worker{
                 com.zeroc.Ice.Properties properties = communicator.getProperties();
                 com.zeroc.Ice.Identity id = com.zeroc.Ice.Util.stringToIdentity(properties.getProperty("Identity"));
                 ObjectPrx subscriber = adapter.add(new WorkerI(piControllerPrx), id);
-                WorkerPrx subscriberProxy = WorkerPrx.uncheckedCast(subscriber);
+
                 adapter.activate();
 
+
+                WorkerPrx subscriberProxy = WorkerPrx.uncheckedCast(communicator.propertyToProxy("MyProxy"));
                 piControllerPrx.subscribe(subscriberProxy);
                 System.out.println("Subscribed - " + subscriberProxy.toString());
 
