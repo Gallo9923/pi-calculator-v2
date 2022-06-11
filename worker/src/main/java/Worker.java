@@ -32,7 +32,7 @@ public class Worker{
                 adapter.activate();
 
 
-                WorkerPrx subscriberProxy = WorkerPrx.uncheckedCast(communicator.propertyToProxy("MyProxy"));
+                final WorkerPrx subscriberProxy = WorkerPrx.uncheckedCast(communicator.stringToProxy(properties.getProperty("MyProxy")).ice_twoway());
                 piControllerPrx.subscribe(subscriberProxy);
                 System.out.println("Subscribed - " + subscriberProxy.toString());
 
