@@ -35,6 +35,21 @@
         <node name="node4">
             <server-instance template="PiWorkerTemplate" index="3" port="9025" host="hgrid12"/>
         </node>
+        <node name="node5">
+            <server-instance template="PiWorkerTemplate" index="4" port="9025" host="hgrid13"/>
+        </node>
+        <node name="node6">
+            <server-instance template="PiWorkerTemplate" index="5" port="9025" host="hgrid14"/>
+        </node>
+        <node name="node7">
+            <server-instance template="PiWorkerTemplate" index="6" port="9025" host="hgrid15"/>
+        </node>
+        <node name="node8">
+            <server-instance template="PiWorkerTemplate" index="7" port="9025" host="hgrid16"/>
+        </node>
+        <node name="node9">
+            <server-instance template="PiWorkerTemplate" index="8" port="9025" host="hgrid17"/>
+        </node>
 
     </application>
 
