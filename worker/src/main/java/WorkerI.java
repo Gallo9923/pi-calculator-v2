@@ -68,6 +68,8 @@ public class WorkerI implements Pi.Worker{
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
+            this.state = State.IDLE;
+
             int pointsInside = result.getResult();
             TaskResult taskResult = new TaskResult(task.id, pointsInside);
 
@@ -76,7 +78,7 @@ public class WorkerI implements Pi.Worker{
             System.out.println("Task report " + taskResult.pointsInside + " - task id " + taskResult.taskId);
         }
 
-        this.state = State.IDLE;
+        //this.state = State.IDLE;
 
         // TODO: getTask()
 
