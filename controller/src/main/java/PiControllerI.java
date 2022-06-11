@@ -140,7 +140,9 @@ public class PiControllerI implements PiController {
             BigInteger batchSize = new BigInteger(job.batchSize + "");
 
             // TODO: Start Transaction
-            if (taskCounter.compareTo(n.divide(batchSize)) == -1){
+            boolean taskNeeded = taskCounter.compareTo(n.divide(batchSize)) == -1;
+            System.out.println("task counter: " + taskCounter + " - " + taskNeeded);
+            if (taskNeeded){
                 System.out.println("New task");
 
                 taskCounter = new BigInteger(job.taskCounter).add(BigInteger.ONE);
