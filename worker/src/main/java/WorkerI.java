@@ -39,9 +39,13 @@ public class WorkerI implements Pi.Worker{
             return;
         }
 
-        this.state = State.WORKING;
-
         Pi.Task task = piControllerPrx.getTask(jobId);
+
+        if (task == null) {
+            return;
+        }
+
+        this.state = State.WORKING;
 
         Counter result = new PIResult();
         Point.setEpsilonPower(task.epsilonPower);
