@@ -116,10 +116,10 @@ public class PiControllerI implements PiController {
 
     public Task getTask(String jobId) {
 
-        System.out.println("Get task for jobId" + jobId);
+        System.out.println("Get task for jobId " + jobId);
 
         Task task = null;
-        if (pendingTasks.size() >= 0){
+        if (pendingTasks.size() > 0){
             task = pendingTasks.get(0);
             task.state =  TaskState.IN_PROGRESS.toString();
 
