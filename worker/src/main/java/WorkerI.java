@@ -46,19 +46,22 @@ public class WorkerI implements Pi.Worker{
         }
 
         this.state = State.WORKING;
+        System.out.println("Worker working");
 
         Counter result = new PIResult();
         Point.setEpsilonPower(task.epsilonPower);
         Random r = new Random(task.seed);
         ExecutorService pool = Executors.newFixedThreadPool(THREAD_NUMBER);
 
-        int numberOfTasks = task.batchSize / BATCH_SIZE;
+        int numberOfTasks = task.batchSize / BATCH_SIZE; // 1
+        System.out.println("Number of tasks to be done: " + numberOfTasks);
         for (int i = 0; i < numberOfTasks; i++) {
             Task t = new Task(r.nextInt(), BATCH_SIZE, null, result);
             pool.execute(t);
         }
 
         try {
+            System.out.println("Waiting worker to finish");
             pool.shutdown();
             pool.awaitTermination(30, TimeUnit.DAYS);
         } catch (InterruptedException e) {
