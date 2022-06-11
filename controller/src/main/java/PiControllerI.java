@@ -120,10 +120,13 @@ public class PiControllerI implements PiController {
 
         Task task = null;
         if (pendingTasks.size() > 0){
+            System.out.println("Pending tasks");
             task = pendingTasks.get(0);
             task.state =  TaskState.IN_PROGRESS.toString();
 
         }else{
+            System.out.println("No pending tasks");
+
             Job job = jobs.get(jobId);
 
             BigInteger taskCounter = new BigInteger(job.taskCounter);
@@ -132,6 +135,7 @@ public class PiControllerI implements PiController {
 
             // TODO: Start Transaction
             if (taskCounter.compareTo(n.divide(batchSize)) == -1){
+                System.out.println("New task");
 
                 taskCounter = new BigInteger(job.taskCounter).add(BigInteger.ONE);
                 job.taskCounter = taskCounter.toString();
@@ -141,6 +145,7 @@ public class PiControllerI implements PiController {
 
                 String taskId = UUID.randomUUID().toString();
                 task = new Task(taskId, job.id, job.seed, job.batchSize, LocalDateTime.now().toString(), TaskState.IN_PROGRESS.toString(), taskCounter.toString(), 0, job.epsilonPower);
+                System.out.println("task created");
 
                 this.tasks.put(taskId, task);
 
@@ -148,6 +153,7 @@ public class PiControllerI implements PiController {
                 new Thread(new Checker(this, taskMillisTimeout, task.id, jobSem)).start();
 
             }else {
+                System.out.println("Calculating pi");
                 // Calculate PI
                 BigDecimal pi = (new BigDecimal(job.pointsInside).divide(new BigDecimal(n))).multiply(new BigDecimal(4));
                 job.pi = pi.toString();
@@ -192,6 +198,8 @@ public class PiControllerI implements PiController {
             pointsInside = pointsInside.add(workerResult);
             job.pointsInside = pointsInside.toString();
 
+            System.out.println("set task result called");
+
             notifyAllSubscribers(job.id);
 
         } catch (InterruptedException e) {
@@ -200,7 +208,6 @@ public class PiControllerI implements PiController {
             this.jobSem.release();
         }
     }
-
 
     @Override
     public void notifyPiResult(Job job, Current current) {
