@@ -12,7 +12,7 @@
                 <option>-jar</option>
                 <option>worker/build/libs/worker.jar</option>
                 <adapter name="PiWorker" endpoints="tcp -h ${host} -p ${port}" replica-group="ReplicatedPiWorkerAdapter"/>
-                <property name="Identity" value="piworker"/>
+                <property name="Identity" value="piworker-${index}"/>
                 <property name="MyProxy" value="piworker-${index}:tcp -h ${host} -p ${port}"/>
 
                 <property name="IceMX.Metrics.Debug.GroupBy" value="id"/>
