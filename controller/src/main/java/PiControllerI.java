@@ -169,7 +169,7 @@ public class PiControllerI implements PiController {
                 new Thread(new Checker(this, taskMillisTimeout, task.id, jobSem)).start();
 
                 //|| jobState.get(jobId).equals(Boolean.FALSE)
-            }else if (tasksDone.compareTo(numberOfTasksNeeded) == 0){
+            }else if (tasksDone.compareTo(numberOfTasksNeeded) == 0 && jobState.get(jobId).equals(Boolean.FALSE)){
                 System.out.println("Calculating pi " + tasksDone.toString() + " " + numberOfTasksNeeded.toString());
 
                 jobState.put(jobId, Boolean.TRUE);
